@@ -1,6 +1,6 @@
 package cn.yijianhao.wxtaroshopadmin0326.error;
 
-import cn.yijianhao.wxtaroshopadmin0326.result.StatusEnum;
+import cn.yijianhao.wxtaroshopadmin0326.system.result.StatusEnum;
 import lombok.Getter;
 import lombok.Setter;
 

@@ -1,4 +1,4 @@
-package cn.yijianhao.wxtaroshopadmin0326.result;
+package cn.yijianhao.wxtaroshopadmin0326.system.result;
 
 import lombok.Getter;
 

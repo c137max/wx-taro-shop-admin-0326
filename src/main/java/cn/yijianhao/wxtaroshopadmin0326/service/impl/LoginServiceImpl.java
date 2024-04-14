@@ -2,10 +2,10 @@ package cn.yijianhao.wxtaroshopadmin0326.service.impl;
 
 import cn.yijianhao.wxtaroshopadmin0326.DTO.Code2SessionRespDTO;
 import cn.yijianhao.wxtaroshopadmin0326.DTO.Token;
-import cn.yijianhao.wxtaroshopadmin0326.auth.TokenService;
-import cn.yijianhao.wxtaroshopadmin0326.config.WechatMiniPConfig;
+import cn.yijianhao.wxtaroshopadmin0326.system.auth.TokenService;
+import cn.yijianhao.wxtaroshopadmin0326.system.config.WechatMiniPConfig;
 import cn.yijianhao.wxtaroshopadmin0326.error.BusinessException;
-import cn.yijianhao.wxtaroshopadmin0326.result.StatusEnum;
+import cn.yijianhao.wxtaroshopadmin0326.system.result.StatusEnum;
 import cn.yijianhao.wxtaroshopadmin0326.service.IHttpService;
 import cn.yijianhao.wxtaroshopadmin0326.service.ILoginService;
 import org.slf4j.Logger;

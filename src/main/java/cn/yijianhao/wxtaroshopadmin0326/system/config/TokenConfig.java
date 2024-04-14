@@ -1,4 +1,4 @@
-package cn.yijianhao.wxtaroshopadmin0326.config;
+package cn.yijianhao.wxtaroshopadmin0326.system.config;
 
 import lombok.Getter;
 import lombok.Setter;

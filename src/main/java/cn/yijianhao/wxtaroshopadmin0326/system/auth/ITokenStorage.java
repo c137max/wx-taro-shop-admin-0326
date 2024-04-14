@@ -1,4 +1,4 @@
-package cn.yijianhao.wxtaroshopadmin0326.auth;
+package cn.yijianhao.wxtaroshopadmin0326.system.auth;
 
 import cn.yijianhao.wxtaroshopadmin0326.DTO.Token;
 

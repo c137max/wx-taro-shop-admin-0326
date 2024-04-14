@@ -1,7 +1,7 @@
-package cn.yijianhao.wxtaroshopadmin0326.auth;
+package cn.yijianhao.wxtaroshopadmin0326.system.auth;
 
 import cn.yijianhao.wxtaroshopadmin0326.DTO.Token;
-import cn.yijianhao.wxtaroshopadmin0326.config.TokenConfig;
+import cn.yijianhao.wxtaroshopadmin0326.system.config.TokenConfig;
 import cn.yijianhao.wxtaroshopadmin0326.utils.DateUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

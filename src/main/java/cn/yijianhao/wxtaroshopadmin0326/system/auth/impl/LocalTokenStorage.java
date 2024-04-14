@@ -1,7 +1,7 @@
-package cn.yijianhao.wxtaroshopadmin0326.auth.impl;
+package cn.yijianhao.wxtaroshopadmin0326.system.auth.impl;
 
 import cn.yijianhao.wxtaroshopadmin0326.DTO.Token;
-import cn.yijianhao.wxtaroshopadmin0326.auth.ITokenStorage;
+import cn.yijianhao.wxtaroshopadmin0326.system.auth.ITokenStorage;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;

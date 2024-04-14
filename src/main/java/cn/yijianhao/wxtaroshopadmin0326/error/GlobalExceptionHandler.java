@@ -1,8 +1,8 @@
 package cn.yijianhao.wxtaroshopadmin0326.error;
 
-import cn.yijianhao.wxtaroshopadmin0326.result.Response;
-import cn.yijianhao.wxtaroshopadmin0326.result.Results;
-import cn.yijianhao.wxtaroshopadmin0326.result.StatusEnum;
+import cn.yijianhao.wxtaroshopadmin0326.system.result.Response;
+import cn.yijianhao.wxtaroshopadmin0326.system.result.Results;
+import cn.yijianhao.wxtaroshopadmin0326.system.result.StatusEnum;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.ControllerAdvice;
