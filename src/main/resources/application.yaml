@@ -17,3 +17,7 @@ wechat:
     secret: <KEY>
 token:
   exp-second: 30
+web:
+  interceptor:
+    public-urls:
+      - /wxLogin/code2Session
