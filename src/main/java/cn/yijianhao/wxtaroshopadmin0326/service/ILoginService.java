@@ -1,5 +1,7 @@
 package cn.yijianhao.wxtaroshopadmin0326.service;
 
+import cn.yijianhao.wxtaroshopadmin0326.DTO.Token;
+
 public interface ILoginService {
-    boolean wxLogin(String code);
+    Token wxLogin(String code);
 }

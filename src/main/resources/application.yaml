@@ -15,3 +15,5 @@ wechat:
   miniapp:
     appid: wxa0000000000000000
     secret: <KEY>
+token:
+  exp-second: 30
