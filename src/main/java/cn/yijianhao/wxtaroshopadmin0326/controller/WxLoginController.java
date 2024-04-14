@@ -16,6 +16,7 @@ public class WxLoginController {
 
     @PostMapping("/code2Session")
     public Response<Code2SessionRepVO> code2Session(@RequestBody @Validated Code2SessionVO vo) {
+
         var repVO = new Code2SessionRepVO("unionid", "openid", "123456");
         return Results.ok(repVO);
     }
