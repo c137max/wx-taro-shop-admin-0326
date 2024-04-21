@@ -11,7 +11,7 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class WxUser {
+public class WxUser extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -19,17 +19,4 @@ public class WxUser {
     private String wxUnionid;
     private Date createTime;
     private Date updateTime;
-    private boolean isDeleted = false;
-
-    @PrePersist
-    protected void onCreate() {
-        createTime = new Date();
-        updateTime = new Date();
-    }
-
-    @PreUpdate
-    protected void onUpdate() {
-        updateTime = new Date();
-    }
-
 }
