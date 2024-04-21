@@ -2,6 +2,8 @@ package cn.yijianhao.wxtaroshopadmin0326.service.impl;
 
 import cn.yijianhao.wxtaroshopadmin0326.DTO.Code2SessionRespDTO;
 import cn.yijianhao.wxtaroshopadmin0326.DTO.Token;
+import cn.yijianhao.wxtaroshopadmin0326.entity.WxUser;
+import cn.yijianhao.wxtaroshopadmin0326.repository.UserRepository;
 import cn.yijianhao.wxtaroshopadmin0326.system.auth.TokenService;
 import cn.yijianhao.wxtaroshopadmin0326.system.config.WechatMiniPConfig;
 import cn.yijianhao.wxtaroshopadmin0326.error.BusinessException;
@@ -20,11 +22,13 @@ public class LoginServiceImpl implements ILoginService {
     private static final Logger logger = LoggerFactory.getLogger(LoginServiceImpl.class);
     private final TokenService tokenService;
     private final WechatMiniPConfig wechatMiniPConfig;
+    private final UserRepository userRepository;
 
-    LoginServiceImpl(IHttpService httpService, TokenService tokenService, WechatMiniPConfig wechatMiniPConfig) {
+    LoginServiceImpl(IHttpService httpService, TokenService tokenService, WechatMiniPConfig wechatMiniPConfig, UserRepository userRepository) {
         this.httpService = httpService;
         this.tokenService = tokenService;
         this.wechatMiniPConfig = wechatMiniPConfig;
+        this.userRepository = userRepository;
     }
 
     @Override
@@ -41,7 +45,15 @@ public class LoginServiceImpl implements ILoginService {
         }
         Token token = tokenService.generateToken(respDTO.getOpenid(), respDTO.getUnionid(), respDTO.getSession_key());
         logger.debug("登录成功: " + respDTO.getOpenid());
-        // todo 保存用户信息
+        boolean b = userRepository.existsByWxOpenid(respDTO.getOpenid());
+        if (!b) {
+            var wxUser = WxUser.builder()
+                    .wxOpenid(respDTO.getOpenid())
+                    .wxUnionid(respDTO.getUnionid())
+                    .build();
+            WxUser savedUser = userRepository.save(wxUser);
+            logger.debug("保存用户信息成功: " + savedUser.getId());
+        }
         return token;
     }
 }
