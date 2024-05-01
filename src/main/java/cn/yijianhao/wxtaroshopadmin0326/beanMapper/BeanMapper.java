@@ -11,7 +11,7 @@ import java.util.List;
 @Mapper
 public interface BeanMapper {
     BeanMapper INSTANCE = Mappers.getMapper(BeanMapper.class);
-    @Mapping(target = "distance", constant = "-1")
+//    @Mapping(target = "distance", constant = "-1")
     SelfPickInfoDTO toSelfPickInfoDTO(SelfPickInfo selfPickInfo);
     List<SelfPickInfoDTO> toSelfPickInfoDTOList(List<SelfPickInfo> selfPickInfos);
 }

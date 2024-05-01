@@ -13,9 +13,6 @@ import java.util.Date;
 @NoArgsConstructor
 @Builder
 public class SelfPickInfo extends BaseEntity {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
     private String displayName;
     private String avatarUrl;
     // 联系人电话

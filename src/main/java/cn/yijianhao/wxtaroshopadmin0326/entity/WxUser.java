@@ -12,11 +12,6 @@ import java.util.Date;
 @NoArgsConstructor
 @Builder
 public class WxUser extends BaseEntity {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
     private String wxOpenid;
     private String wxUnionid;
-    private Date createTime;
-    private Date updateTime;
 }

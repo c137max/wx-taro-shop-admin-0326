@@ -1,16 +1,22 @@
 package cn.yijianhao.wxtaroshopadmin0326.entity;
 
-import jakarta.persistence.PrePersist;
-import jakarta.persistence.PreUpdate;
-import lombok.Data;
+import jakarta.persistence.*;
+import lombok.*;
 
 import java.util.Date;
 
-@Data
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@MappedSuperclass
 public class BaseEntity {
     private Date createTime;
     private Date updateTime;
     private boolean isDeleted;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 
     @PrePersist
     protected void onCreate() {
