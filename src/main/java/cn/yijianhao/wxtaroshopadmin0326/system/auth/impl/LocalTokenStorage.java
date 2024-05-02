@@ -23,7 +23,7 @@ public class LocalTokenStorage implements ITokenStorage {
         }
         Token token = first.get();
         // 检查是否已经过期
-        if (token.getExpiresIn().compareTo(new Date()) > 0) {
+        if (token.getExpiresIn().before(new Date())) {
             tokens.remove(token);
             return null;
         }
