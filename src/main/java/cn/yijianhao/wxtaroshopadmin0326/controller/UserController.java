@@ -1,6 +1,7 @@
 package cn.yijianhao.wxtaroshopadmin0326.controller;
 
 
+import cn.yijianhao.wxtaroshopadmin0326.DTO.UserProfileDTO;
 import cn.yijianhao.wxtaroshopadmin0326.controller.VO.WxUserProfileVO;
 import cn.yijianhao.wxtaroshopadmin0326.service.IUserService;
 import cn.yijianhao.wxtaroshopadmin0326.system.UserContext;
@@ -33,5 +34,11 @@ public class UserController {
         }
         iUserService.updateWxUserProfileByOpenId(openId, wxUserProfileVO.avatarUrl(), wxUserProfileVO.nickName());
         return Results.ok();
+    }
+
+    @GetMapping("/wxUser/profile")
+    public Response<UserProfileDTO> getWxUserProfile() {
+        var profile = iUserService.getWxUserProfileByOpenId(UserContext.getOpenId());
+        return Results.ok(profile);
     }
 }

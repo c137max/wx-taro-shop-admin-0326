@@ -16,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.io.PrintWriter;
 import java.util.List;
+import java.util.Objects;
 
 public class GlobalInterceptor implements HandlerInterceptor {
 
@@ -45,7 +46,7 @@ public class GlobalInterceptor implements HandlerInterceptor {
         if (token != null && token.startsWith("Bearer ")) {
             String accessToken = token.substring(7); // 跳过 "Bearer " 前缀获取实际的 Token 值
             Token token1 = tokenService.getToken(accessToken);
-            if (token1 != null) {
+            if (Objects.nonNull(token1)) {
                 buildUserContext(token1);
                 return true;
             }

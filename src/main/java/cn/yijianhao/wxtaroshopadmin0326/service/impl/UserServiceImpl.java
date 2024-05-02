@@ -1,5 +1,8 @@
 package cn.yijianhao.wxtaroshopadmin0326.service.impl;
 
+import cn.yijianhao.wxtaroshopadmin0326.DTO.UserProfileDTO;
+import cn.yijianhao.wxtaroshopadmin0326.beanMapper.BeanMapper;
+import cn.yijianhao.wxtaroshopadmin0326.entity.WxUser;
 import cn.yijianhao.wxtaroshopadmin0326.repository.WxUserRepository;
 import cn.yijianhao.wxtaroshopadmin0326.service.IUserService;
 import org.slf4j.Logger;
@@ -21,5 +24,11 @@ public class UserServiceImpl implements IUserService {
         if (i == 0) {
             logger.debug("用户信息没有更新:{} -> {}, {}", openid, avatar, nickName);
         }
+    }
+
+    @Override
+    public UserProfileDTO getWxUserProfileByOpenId(String openid) {
+        WxUser wxUser = wxUserRepository.findByWxOpenid(openid);
+        return BeanMapper.INSTANCE.toUserProfileDTO(wxUser);
     }
 }

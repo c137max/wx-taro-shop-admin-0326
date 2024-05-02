@@ -28,9 +28,10 @@ public class TokenService {
                 .unionid(unionid)
                 .sessionKey(sessionKey)
                 .build();
-        token.setExpiresIn(DateUtil.plusSeconds(
+        Date expiresDate = DateUtil.plusSeconds(
                 new Date(),
-                tokenConfig.getExpSecond()));
+                tokenConfig.getExpSecond());
+        token.setExpiresIn(expiresDate);
         UUID uuid = UUID.randomUUID();
         String uuidString = uuid.toString();
         token.setAccessToken(uuidString.replace("-", ""));
