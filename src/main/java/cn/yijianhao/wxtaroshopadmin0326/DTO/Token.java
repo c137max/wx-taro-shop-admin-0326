@@ -1,5 +1,6 @@
 package cn.yijianhao.wxtaroshopadmin0326.DTO;
 
+import cn.yijianhao.wxtaroshopadmin0326.enums.UserType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -17,4 +18,6 @@ public class Token {
     private String unionid;
     private String openid;
     private String sessionKey;
+    private Long userId;
+    private UserType userType;
 }

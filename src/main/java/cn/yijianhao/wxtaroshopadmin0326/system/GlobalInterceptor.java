@@ -15,7 +15,6 @@ import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.io.PrintWriter;
-import java.util.Arrays;
 import java.util.List;
 
 public class GlobalInterceptor implements HandlerInterceptor {
@@ -46,10 +45,16 @@ public class GlobalInterceptor implements HandlerInterceptor {
         if (token != null && token.startsWith("Bearer ")) {
             String accessToken = token.substring(7); // 跳过 "Bearer " 前缀获取实际的 Token 值
             Token token1 = tokenService.getToken(accessToken);
-            if (token1!= null) {
+            if (token1 != null) {
+                buildUserContext(token1);
                 return true;
             }
         }
+        writeFailResponse(response, StatusEnum.NOT_AUTHORIZED);
+        return false;
+    }
+
+    private void writeFailResponse(HttpServletResponse response, StatusEnum statusEnum) throws Exception {
         Response<String> failResp = Results.fail(StatusEnum.NOT_AUTHORIZED);
         response.setContentType("application/json;charset=utf-8");
         String jsonResponse = JsonUtil.objectToJson(failResp);
@@ -57,7 +62,10 @@ public class GlobalInterceptor implements HandlerInterceptor {
         writer.write(jsonResponse);
         writer.flush();
         writer.close();
-        return false;
+    }
+
+    private void buildUserContext(Token token) {
+        UserContext.setUserInfo(token);
     }
 
     @Override

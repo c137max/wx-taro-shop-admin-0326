@@ -3,7 +3,8 @@ package cn.yijianhao.wxtaroshopadmin0326.service.impl;
 import cn.yijianhao.wxtaroshopadmin0326.DTO.Code2SessionRespDTO;
 import cn.yijianhao.wxtaroshopadmin0326.DTO.Token;
 import cn.yijianhao.wxtaroshopadmin0326.entity.WxUser;
-import cn.yijianhao.wxtaroshopadmin0326.repository.UserRepository;
+import cn.yijianhao.wxtaroshopadmin0326.enums.UserType;
+import cn.yijianhao.wxtaroshopadmin0326.repository.WxUserRepository;
 import cn.yijianhao.wxtaroshopadmin0326.system.auth.TokenService;
 import cn.yijianhao.wxtaroshopadmin0326.system.config.WechatMiniPConfig;
 import cn.yijianhao.wxtaroshopadmin0326.error.BusinessException;
@@ -14,6 +15,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import java.util.Objects;
+
 
 @Service
 public class LoginServiceImpl implements ILoginService {
@@ -22,13 +25,13 @@ public class LoginServiceImpl implements ILoginService {
     private static final Logger logger = LoggerFactory.getLogger(LoginServiceImpl.class);
     private final TokenService tokenService;
     private final WechatMiniPConfig wechatMiniPConfig;
-    private final UserRepository userRepository;
+    private final WxUserRepository wxUserRepository;
 
-    LoginServiceImpl(IHttpService httpService, TokenService tokenService, WechatMiniPConfig wechatMiniPConfig, UserRepository userRepository) {
+    LoginServiceImpl(IHttpService httpService, TokenService tokenService, WechatMiniPConfig wechatMiniPConfig, WxUserRepository wxUserRepository) {
         this.httpService = httpService;
         this.tokenService = tokenService;
         this.wechatMiniPConfig = wechatMiniPConfig;
-        this.userRepository = userRepository;
+        this.wxUserRepository = wxUserRepository;
     }
 
     @Override
@@ -45,15 +48,21 @@ public class LoginServiceImpl implements ILoginService {
         }
         Token token = tokenService.generateToken(respDTO.getOpenid(), respDTO.getUnionid(), respDTO.getSession_key());
         logger.debug("登录成功: " + respDTO.getOpenid());
-        boolean b = userRepository.existsByWxOpenid(respDTO.getOpenid());
-        if (!b) {
+        WxUser b = wxUserRepository.findByWxOpenid(respDTO.getOpenid());
+        if (Objects.isNull(b)) {
             var wxUser = WxUser.builder()
                     .wxOpenid(respDTO.getOpenid())
                     .wxUnionid(respDTO.getUnionid())
                     .build();
-            WxUser savedUser = userRepository.save(wxUser);
+            WxUser savedUser = wxUserRepository.save(wxUser);
+            token.setUserId(savedUser.getId());
             logger.debug("保存用户信息成功: " + savedUser.getId());
+        } else {
+            token.setUserId(b.getId());
         }
+        token.setUserType(UserType.WE_CHART);
         return token;
     }
+
+
 }

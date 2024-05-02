@@ -14,4 +14,6 @@ import java.util.Date;
 public class WxUser extends BaseEntity {
     private String wxOpenid;
     private String wxUnionid;
+    private String nickName;
+    private String avatarUrl;
 }
